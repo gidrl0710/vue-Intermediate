@@ -1,7 +1,7 @@
 <template>
   <div>
-    <ul>
-      <li v-for="( todoItem, index) in todoItems" v-bind:key="todoItem.item" class="shadow">
+    <transition-group name="list" tag="ul">
+      <li v-for="( todoItem, index) in propsdata" v-bind:key="todoItem.item" class="shadow">
         <span v-bind:class="{ textCompleted: todoItem.complete }" v-on:click="toggelComplete(todoItem, index)">
           <i class="checkBtn fa-solid fa-check" ></i>
         </span>
@@ -10,37 +10,30 @@
           <i class="fa-solid fa-trash-can"></i>
         </span>
       </li>
-    </ul>
+    </transition-group>
   </div>
 </template>
 
 <script>
+
 export default {
-  data: function() {
-    return {
-      todoItems: []
-    }
-  },
+  props: ['propsdata'],
   methods: {
-    removeTodo: function(todoItem, index) {
-      localStorage.removeItem(todoItem); // localStorage의 key를 지우면 value도 지워짐
-      this.todoItems.splice(index, 1); // index부터1개 지움 새로운배열로 반환해줌
+    removeTodo(todoItem, index) {
+      this.$emit('removeItem', todoItem, index);
+
+      // localStorage.removeItem(todoItem); // localStorage의 key를 지우면 value도 지워짐
+      // this.todoItems.splice(index, 1); // index부터1개 지움 새로운배열로 반환해줌
     },
-    toggelComplete: function(todoItem, index) {
-      todoItem.complete = !todoItem.complete;
-      console.log(index);
-      // localstorage에 데이터 갱신(todoItem.complete 값 바뀐거 다시 넣어준다)
-      localStorage.removeItem(todoItem.item);
-      localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
+    toggelComplete(todoItem, index) {
+      
+      this.$emit('toggleItem', todoItem, index);
+
+      // // localstorage에 데이터 갱신(todoItem.complete 값 바뀐거 다시 넣어준다)
+      // localStorage.removeItem(todoItem.item);
+      // localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
     }
 
-  },
-  created: function() { // instance가 생성된후 실행하는 라이프사이클
-    if(localStorage.length > 0 ){
-      for(var i = 0; i < localStorage.length; i++){
-        this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i)))); // todoItems배열에 localStorage데이터를 집어넣음
-      }
-    }
   },
 
 }
@@ -79,5 +72,13 @@ export default {
   .removeBtn {
     margin-left: auto;
     color: red
+  }
+
+  .list-enter-active, .list-leave-active {
+    transition: all 1s;
+  }
+  .list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
+    opacity: 0;
+    transform: translateY(30px);
   }
 </style>
