@@ -33,7 +33,9 @@ export default {
   methods: {
     addTodo() {
       if(this.newTodoItem !== ''){
-        this.$emit('addTodoItem', this.newTodoItem);
+        //this.$emit('addTodoItem', this.newTodoItem);
+
+        this.$store.commit('addOneItem', this.newTodoItem);
 
         // var obj = { complete: false, item: this.newTodoItem };
         // localStorage.setItem(this.newTodoItem, JSON.stringify(obj)); // (key,value)

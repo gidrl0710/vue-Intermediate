@@ -1,12 +1,17 @@
 <template>
   <header>
-    <h1>Todo List</h1>
+    <h1>{{ this.header }}</h1>
+    <!-- <h1>{{ this.$store.state.headerText }}</h1> -->
   </header>
 </template>
 
 <script>
-export default {
+import { mapState } from 'vuex'
 
+export default {
+  computed: {
+    ...mapState(['header'])
+  }
 }
 </script>
 

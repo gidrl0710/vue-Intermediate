@@ -1,12 +1,14 @@
 <template>
   <div>
     <transition-group name="list" tag="ul">
-      <li v-for="( todoItem, index) in propsdata" v-bind:key="todoItem.item" class="shadow">
-        <span v-bind:class="{ textCompleted: todoItem.complete }" v-on:click="toggelComplete(todoItem, index)">
+      <li v-for="( todoItem, index) in this.storedTodoItems" v-bind:key="todoItem.item" class="shadow">
+      <!-- <li v-for="( todoItem, index) in this.$store.state.todoItems" v-bind:key="todoItem.item" class="shadow"> -->
+      <!-- <li v-for="( todoItem, index) in propsdata" v-bind:key="todoItem.item" class="shadow"> -->
+        <span v-bind:class="{ textCompleted: todoItem.complete }" v-on:click="toggelComplete({ todoItem, index })">
           <i class="checkBtn fa-solid fa-check" ></i>
         </span>
         <span v-bind:class="{ textCompleted: todoItem.complete }">{{ todoItem.item }}</span>
-        <span class="removeBtn" v-on:click="removeTodo(todoItem, index)">
+        <span class="removeBtn" v-on:click="removeTodo({ todoItem, index })">
           <i class="fa-solid fa-trash-can"></i>
         </span>
       </li>
@@ -15,26 +17,42 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import { mapMutations } from 'vuex'
 
 export default {
-  props: ['propsdata'],
+  //props: ['propsdata'],
   methods: {
-    removeTodo(todoItem, index) {
-      this.$emit('removeItem', todoItem, index);
+    ...mapMutations({
+      removeTodo:'removeOneItem',
+      toggelComplete : 'toggelOneComplete'
+    }),
+    // removeTodo(todoItem, index) {
+    //   //this.$emit('removeItem', todoItem, index);
 
-      // localStorage.removeItem(todoItem); // localStorage의 key를 지우면 value도 지워짐
-      // this.todoItems.splice(index, 1); // index부터1개 지움 새로운배열로 반환해줌
-    },
-    toggelComplete(todoItem, index) {
+    //   // const obj = {
+    //   //   todoItem,
+    //   //   index,
+    //   // }
+    //   this.$store.commit('removeOneItem', { todoItem, index }); // obj객체 간결식=> { todoItem, index }
+
+    //   // localStorage.removeItem(todoItem); // localStorage의 key를 지우면 value도 지워짐
+    //   // this.todoItems.splice(index, 1); // index부터1개 지움 새로운배열로 반환해줌
+    // },
+    // toggelComplete(todoItem, index) {
       
-      this.$emit('toggleItem', todoItem, index);
+    //   //this.$emit('toggleItem', todoItem, index);
 
-      // // localstorage에 데이터 갱신(todoItem.complete 값 바뀐거 다시 넣어준다)
-      // localStorage.removeItem(todoItem.item);
-      // localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
-    }
+    //   this.$store.commit('toggelOneComplete', { todoItem, index });
 
+    //   // // localstorage에 데이터 갱신(todoItem.complete 값 바뀐거 다시 넣어준다)
+    //   // localStorage.removeItem(todoItem.item);
+    //   // localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
+    // }
   },
+  computed: {
+    ...mapGetters(['storedTodoItems'])
+  }
 
 }
 </script>
