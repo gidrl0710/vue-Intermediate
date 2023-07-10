@@ -13,9 +13,9 @@
 
 # 실습내용
 - 뷰 최신 CLI 도구 특징
-= 컴포넌트 기반 웹 앱 설계 방법
+- 컴포넌트 기반 웹 앱 설계 방법
 - 컴포넌트 설계 방법
-= ES6 (const & let, 화살표 함수, 향상된 객체 리터럴, 모듈 등)
+- ES6 (const & let, 화살표 함수, 향상된 객체 리터럴, 모듈 등)
 - Vuex (state, getters, mutations, actions, modules 등)
 
 ## 개발 환경
