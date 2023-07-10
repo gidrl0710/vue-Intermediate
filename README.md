@@ -1,10 +1,8 @@
 
 # Vue.js Todo List 애플리케이션
+- 할일 목록 저장 및 삭제 리스트  구현
 
-할일 목록 저장 및 삭제 리스트  구현
-
-## 기술 스택
-
+# 기술 스택
 - Vue.js 5.0.8
 - Vue Router
 - Vuex
@@ -18,8 +16,7 @@
 - ES6 (const & let, 화살표 함수, 향상된 객체 리터럴, 모듈 등)
 - Vuex (state, getters, mutations, actions, modules 등)
 
-## 개발 환경
-
+# 개발 환경
 - [Chrome](https://www.google.com/intl/ko/chrome/)
 - [Git](https://git-scm.com/downloads)
 - [Visual Studio Code](https://code.visualstudio.com/)
