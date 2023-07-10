@@ -3,7 +3,8 @@ const storage = {
     const arr = [];
     if(localStorage.length > 0 ){
       for(let i = 0; i < localStorage.length; i++){
-        arr.push(JSON.parse(localStorage.getItem(localStorage.key(i)))); // todoItems배열에 localStorage데이터를 집어넣음
+        arr.push(localStorage.getItem(localStorage.key(i)));
+        //arr.push(JSON.parse(localStorage.getItem(localStorage.key(i)))); // todoItems배열에 localStorage데이터를 집어넣음
       }
     }
     return arr;
