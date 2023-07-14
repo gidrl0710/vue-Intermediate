@@ -1,6 +1,7 @@
 
 # Vue.js Todo List 애플리케이션
 - 할일 목록 저장 및 삭제 리스트  구현
+<img src="./src/assets/todoList.jpg" width="50%" height="50%">
 
 # 기술 스택
 - Vue.js 5.0.8
